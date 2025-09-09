@@ -1,36 +1,60 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Gallery — Rebecca Lyle</title>
-<meta name="description" content="Rebecca Lyle — Portfolio"/>
-<link rel="stylesheet" href="./styles.css"/>
-<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"/>
-<meta property="og:title" content="Gallery — Rebecca Lyle"/>
-<meta property="og:description" content="Rebecca Lyle — Portfolio"/>
-<meta property="og:type" content="website"/>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Person", "name": "Rebecca Lyle", "jobTitle": "Entrepreneur & Trader", "email": "mailto:Rebecca09101984@gmail.com", "url": "https://rebecca-lyle.vercel.app/", "worksFor": {"@type": "Organization", "name": "Maison d'Essence"}}, {"@context": "https://schema.org", "@type": "WebSite", "name": "Rebecca Lyle \u2014 Portfolio", "url": "https://rebecca-lyle.vercel.app/"}]</script>
-<script defer src="./theme.js"></script>
-</head>
-<body>
-<div class="container">
-  <nav class="nav">
-    <div class="brand"><a href="./index.html">Rebecca Lyle</a></div>
-    <a href="./about.html">About</a>
-    <a href="./projects.html">Projects</a>
-    <a href="./gallery.html">Gallery</a>
-    <a href="./resume.html">Resume</a>
-    <a href="./contact.html">Contact</a>
-    <button class="theme-toggle" onclick="toggleTheme()"><span id="theme-label">Dark</span> Mode</button>
-  </nav>
+<!doctype html><html lang='en'><head><meta charset='utf-8'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<title>Gallery — Rebecca Lyle</title><link rel='stylesheet' href='./styles.css'/><link rel='icon' href='./assets/favicon.svg' type='image/svg+xml'/>
+<script defer src='./theme.js'></script></head><body>
+<div class='container'><nav class='nav'><div class='brand'><a href='./index.html'>Rebecca Lyle</a></div>
+<a href='./about.html'>About</a><a href='./projects.html'>Projects</a><a href='./gallery.html'>Gallery</a>
+<a href='./resume.html'>Resume</a><a href='./contact.html'>Contact</a><a href='./blog.html'>Blog</a>
+<button class='theme-toggle' onclick='toggleTheme()'><span id='theme-label'>Dark</span> Mode</button></nav>
+<div class='filters'>
+  <button class='filter-btn active' data-filter='all'>All</button>
+  <button class='filter-btn' data-filter='factory'>Factory</button>
+  <button class='filter-btn' data-filter='realestate'>Real Estate</button>
+  <button class='filter-btn' data-filter='trading'>Trading</button>
+  <button class='filter-btn' data-filter='lifestyle'>Lifestyle</button>
+</div>
+<div class='grid'>
+  <!-- Factory -->
+  <div class='card item' data-group='factory'><img class='responsive' src='./assets/bottles.jpg' alt='Perfume bottles'><div class='caption'>Materials lineup</div></div>
+  <div class='card item' data-group='factory'><img class='responsive' src='./assets/lab.jpg' alt='Lab'><div class='caption'>Lab & QC</div></div>
+  <div class='card item' data-group='factory'><img class='responsive' src='./assets/extraction.jpg' alt='CO2 extraction'><div class='caption'>CO₂ Extraction</div></div>
 
-<div class="grid">
-  <div class="card"><img class="responsive" src="./assets/sample1.svg" alt="Lab glassware"/></div>
-  <div class="card"><img class="responsive" src="./assets/sample2.svg" alt="Coastal villa"/></div>
-  <div class="card"><img class="responsive" src="./assets/sample3.svg" alt="Gold market screen"/></div>
+  <!-- Real Estate -->
+  <div class='card item' data-group='realestate'><img class='responsive' src='./assets/villa.jpg' alt='Luxury villa'><div class='caption'>Luxury Villa</div></div>
+  <div class='card item' data-group='realestate'><img class='responsive' src='./assets/interior.jpg' alt='Modern interior'><div class='caption'>Modern Interior</div></div>
+  <div class='card item' data-group='realestate'><img class='responsive' src='./assets/house.jpg' alt='Townhouse'><div class='caption'>Townhouse</div></div>
+
+  <!-- Trading -->
+  <div class='card item' data-group='trading'><img class='responsive' src='./assets/patterns.jpg' alt='Patterns'><div class='caption'>Pattern Playbooks</div></div>
+  <div class='card item' data-group='trading'><img class='responsive' src='./assets/gold.jpg' alt='Gold'><div class='caption'>Gold & Macro</div></div>
+  <div class='card item' data-group='trading'><img class='responsive' src='./assets/chart.jpg' alt='Trading screen'><div class='caption'>Execution screen</div></div>
+
+  <!-- Lifestyle -->
+  <div class='card item' data-group='lifestyle'><img class='responsive' src='./assets/edinburgh.jpg' alt='Edinburgh'><div class='caption'>Edinburgh</div></div>
+  <div class='card item' data-group='lifestyle'><img class='responsive' src='./assets/roses.jpg' alt='Rose field'><div class='caption'>Roses at sunset</div></div>
+  <div class='card item' data-group='lifestyle'><img class='responsive' src='./assets/flowers.jpg' alt='Flowers'><div class='caption'>Wildflower field</div></div>
 </div>
 
-  <footer class="footer">© 2025 Rebecca Lyle. All rights reserved.</footer>
+<div id='lightbox'>
+  <img id='lightbox-img' src=''>
+  <div class='controls'>
+    <button id='prevBtn'>Prev</button>
+    <button id='nextBtn'>Next</button>
+    <button id='closeBtn'>Close</button>
+  </div>
 </div>
-</body></html>
+<script>
+// Filters
+const btns=document.querySelectorAll('.filter-btn');const items=document.querySelectorAll('.item');
+btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;items.forEach(it=>{it.style.display=(f==='all'||it.dataset.group===f)?'block':'none';});}));
+// Lightbox + keyboard
+const lb=document.getElementById('lightbox');const lbImg=document.getElementById('lightbox-img');
+const imgs=[...document.querySelectorAll('.grid img')];let currentIndex=-1;
+function showLightbox(i){currentIndex=i;lbImg.src=imgs[i].src;lb.classList.add('show');}
+imgs.forEach((img,i)=>img.addEventListener('click',()=>showLightbox(i)));
+document.getElementById('closeBtn').addEventListener('click',()=>lb.classList.remove('show'));
+document.getElementById('prevBtn').addEventListener('click',()=>{if(currentIndex>0)showLightbox(currentIndex-1)});
+document.getElementById('nextBtn').addEventListener('click',()=>{if(currentIndex<imgs.length-1)showLightbox(currentIndex+1)});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('show'))return; if(e.key==='Escape')lb.classList.remove('show'); if(e.key==='ArrowLeft'&&currentIndex>0)showLightbox(currentIndex-1); if(e.key==='ArrowRight'&&currentIndex<imgs.length-1)showLightbox(currentIndex+1);});
+</script>
+<footer class='footer'>© 2025 Rebecca Lyle. All rights reserved.</footer></div></body></html>
