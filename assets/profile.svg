@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+<rect width="600" height="400" fill="#eef2ff"/>
+<circle cx="300" cy="160" r="80" fill="#c7d2fe"/>
+<rect x="200" y="250" width="200" height="90" rx="20" fill="#c7d2fe"/>
+<text x="300" y="370" text-anchor="middle" font-family="Verdana" font-size="22" fill="#1d3af1">Rebecca Lyle</text>
+</svg>
